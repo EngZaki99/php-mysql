@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Account Form</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #040506;
+        }
+        .container {
+            max-width: 760px;
+            margin: auto;
+            padding: 28px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.10);
+        }
+        h1 { margin-top: 0; color: #123b68; text-align: center; }
+        .intro { text-align: center; color: #64748b; margin-bottom: 25px; }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+        .field { display: flex; flex-direction: column; gap: 8px; }
+        .full { grid-column: 1 / -1; }
+        label, .field-title { font-weight: bold; font-size: 14px; }
+        input[type="text"], input[type="number"], select, input[type="file"] {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: white;
+            font-size: 15px;
+        }
+        .choices { display: flex; gap: 18px; flex-wrap: wrap; padding: 8px 0; }
+        .choices label { font-weight: normal; }
+        .buttons { display: flex; gap: 12px; margin-top: 25px; }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: 0;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .submit { background: #1769aa; color: white; }
+        .reset { background: #e2e8f0; color: #1e293b; }
+        button:hover { opacity: 0.9; }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .full { grid-column: auto; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Banking Account Form</h1>
+
+        <form action="process.php" method="POST" enctype="multipart/form-data">
+            <div class="grid">
+                <div class="field">
+                    <label for="customer_name">Customer Full Name</label>
+                    <input type="text" id="customer_name" name="customer_name" required>
+                </div>
+
+                <div class="field">
+                    <label for="account_number">Account Number</label>
+                    <input type="text" id="account_number" name="account_number" required>
+                </div>
+
+                <div class="field">
+                    <span class="field-title">Gender</span>
+                    <div class="choices">
+                        <label><input type="radio" name="gender" value="Male" required> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="account_type">Account Type</label>
+                    <select id="account_type" name="account_type" required>
+                        <option value="">-- Select account --</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Current">Current</option>
+                        <option value="Business">Business</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="opening_balance">Opening Balance ($)</label>
+                    <input type="number" id="opening_balance" name="opening_balance" min="0" step="0.01" required>
+                </div>
+
+                <div class="field">
+                    <span class="field-title">Transaction Type</span>
+                    <div class="choices">
+                        <label><input type="radio" name="transaction_type" value="Deposit" required> Deposit</label>
+                        <label><input type="radio" name="transaction_type" value="Withdrawal"> Withdrawal</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="transaction_amount">Transaction Amount ($)</label>
+                    <input type="number" id="transaction_amount" name="transaction_amount" min="0.01" step="0.01" required>
+                </div>
+
+                <div class="field">
+                    <label for="duration">Account Duration (Years)</label>
+                    <input type="number" id="duration" name="duration" min="0" step="1" required>
+                </div>
+
+                <div class="field full">
+                    <label for="id_document">Identification Document (max 2 MB)</label>
+                    <input type="file" id="id_document" name="id_document" required>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="submit" type="submit">Process Transaction</button>
+                <button class="reset" type="reset">Reset</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
